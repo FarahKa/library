@@ -8,11 +8,14 @@ class AllModels(models.Model):
     class meta:
         abstract = True
 
+
 class Author(AllModels):
     full_name = models.CharField(max_length=500)
     dob = models.DateField()
     class meta:
         ordering = ["full_name"]
+    def __str__(self):
+        return self.full_name
 
 
 class Book(AllModels):
@@ -20,6 +23,8 @@ class Book(AllModels):
     author_field = models.ForeignKey(Author, on_delete=models.CASCADE)
     class meta:
         ordering = ["title"]
+    def __str__(self):
+        return self.title
 
     #def __init__(self, title, author_id,):
     #    super().__init__(*args, **kwargs)
