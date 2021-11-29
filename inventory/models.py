@@ -17,7 +17,7 @@ class Author(AllModels):
 
 class Book(AllModels):
     title = models.CharField(max_length=500)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author_field = models.ForeignKey(Author, on_delete=models.CASCADE)
     class meta:
         ordering = ["title"]
 
