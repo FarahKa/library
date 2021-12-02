@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 from inventory import views
+from rest_framework.authtoken.views import obtain_auth_token
 
 router = DefaultRouter()
 router.register(r'books', views.BookViewSet, basename = 'book')
@@ -24,5 +25,6 @@ router.register(r'books', views.BookViewSet, basename = 'book')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('authors/', views.AuthorList.as_view()),
-    path('authors/<int:pk>/', views.AuthorDetail.as_view())
+    path('authors/<int:pk>/', views.AuthorDetail.as_view()),
+    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
 ] + router.urls
