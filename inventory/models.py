@@ -21,6 +21,8 @@ class Author(AllModels):
 class Book(AllModels):
     title = models.CharField(max_length=500)
     author_field = models.ForeignKey(Author, on_delete=models.CASCADE)
+    number_of_pages = models.IntegerField()
+    pages_read = models.IntegerField()
     class meta:
         ordering = ["title"]
     def __str__(self):

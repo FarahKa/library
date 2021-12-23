@@ -5,8 +5,20 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view
 
 # Create your views here.
+
+@api_view(http_method_names=['GET'])
+def percentage_read(request, pk):
+    book = Book.objects.filter(id=pk).first()
+    if book:
+        try:
+            percentage = (book.pages_read / book.number_of_pages) * 100
+            return Response({"percentage" : percentage}, status = 200)
+        except ZeroDivisionError:
+            return Response("Le nombre de pages du livre n'est pas valide.", status = 403)
+    return Response(status = 404)
 
 #Using a ModelViewSet
 #actions: list, create, retrieve, update, partial_update, destroy

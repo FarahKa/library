@@ -27,4 +27,5 @@ urlpatterns = [
     path('authors/', views.AuthorList.as_view()),
     path('authors/<int:pk>/', views.AuthorDetail.as_view()),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
+    path('percentage/<int:pk>/', views.percentage_read)
 ] + router.urls
