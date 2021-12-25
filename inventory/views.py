@@ -22,10 +22,10 @@ def percentage_read(request, pk):
 
 #Using a ModelViewSet
 #actions: list, create, retrieve, update, partial_update, destroy
-class BookViewSet(viewsets.ModelViewSet):
-    """A viewset for listing and editing books"""
-    serializer_class = BookSerializer
-    queryset = Book.objects.all()
+# class BookViewSet(viewsets.ModelViewSet):
+#     """A viewset for listing and editing books"""
+#     serializer_class = BookSerializer
+#     queryset = Book.objects.all()
 
 #Simple class based view
 class AuthorList(APIView):
@@ -42,7 +42,7 @@ class AuthorList(APIView):
             return Response(serializer.data, status = 201)
         return Response(serializer.errors, status = 400)
 class AuthorDetail(APIView):
-    permission_classes = (IsAuthenticated,) 
+    #permission_classes = (IsAuthenticated,) 
     def get(self, request, pk, format = None):
         author = Author.objects.filter(id=pk).first()
         if author:
@@ -64,6 +64,46 @@ class AuthorDetail(APIView):
         if not author:
             return Response(status=400)
         author.delete()
+        return Response(status = 204)
+
+
+#Simple class based view
+class BookList(APIView):
+    """A class based view for an author crud"""
+    def get(self, request, format=None):
+        books = Book.objects.all()
+        serializer = BookSerializer(books, many=True)
+        return Response(serializer.data, status = 200)
+
+    def post(self, request, format=None):
+        serializer = BookSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = 201)
+        return Response(serializer.errors, status = 400)
+class BookDetail(APIView):
+    #permission_classes = (IsAuthenticated,) 
+    def get(self, request, pk, format = None):
+        book = Book.objects.filter(id=pk).first()
+        if book:
+            serializer = BookSerializer(book)
+            return Response(serializer.data, status = 200)
+        return Response(status = 404)
+    def put(self, request, pk, format=None):
+        book = Book.objects.filter(id=pk).first()
+        if not book:
+            return Response(status= 404)
+        serializer = BookSerializer(book, data = request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status = 400)
+        serializer.save()
+        return Response(serializer.data, status = 200)
+
+    def delete(self, request, pk, format = None):
+        book = Book.objects.filter(id=pk).first()
+        if not book:
+            return Response(status=400)
+        book.delete()
         return Response(status = 204)
 
 

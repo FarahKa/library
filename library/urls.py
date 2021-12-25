@@ -19,13 +19,16 @@ from rest_framework.routers import DefaultRouter
 from inventory import views
 from rest_framework.authtoken.views import obtain_auth_token
 
-router = DefaultRouter()
-router.register(r'books', views.BookViewSet, basename = 'book')
+#router = DefaultRouter()
+#router.register(r'books', views.BookViewSet, basename = 'book')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('authors/', views.AuthorList.as_view()),
-    path('authors/<int:pk>/', views.AuthorDetail.as_view()),
+    path('authors/<int:pk>/', views.AuthorDetail.as_view(), name="authors"),
+    path('books/', views.BookList.as_view()),
+    path('books/<int:pk>/', views.BookDetail.as_view(), name="books"),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
-    path('percentage/<int:pk>/', views.percentage_read)
-] + router.urls
+    path('percentage/<int:pk>/', views.percentage_read, name='percentage')
+] 
+#+ router.urls
