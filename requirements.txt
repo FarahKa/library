@@ -1,1 +1,3 @@
 # nothing
+Django == 3.2.8
+djangorestframework == 3.12.4

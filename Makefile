@@ -1,6 +1,6 @@
 # target: test - calls the "test" django command
 test:
-	python manage.py test --settings=$(TEST_SETTINGS)
+	python3 manage.py test
 
 # target: clean - remove all ".pyc" files
 clean:
@@ -11,4 +11,4 @@ update:
 	pip install -U -r requirements.txt
 
 startdev:
-	python manage.py runserver
+	python3 manage.py runserver
