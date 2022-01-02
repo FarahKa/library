@@ -2,3 +2,4 @@
 Django == 3.2.8
 djangorestframework == 3.12.4
 pylint == 2.12.2
+pylint-django == 2.5.0

@@ -5,7 +5,7 @@ setup:
 
 # target: lint - linting project
 lint:
-	pylint *.py
+	# pylint --load-plugins pylint_django --django-settings-module=library.settings inventory/*.py
 
 # target: test - calls the "test" django command
 test:
