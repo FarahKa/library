@@ -1,3 +1,7 @@
+# target: setup - environment setup for pip
+setup:
+	python3 -m pip install --upgrade pip
+
 # target: test - calls the "test" django command
 test:
 	python3 manage.py test
