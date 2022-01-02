@@ -1,6 +1,11 @@
-# target: setup - environment setup for pip
+# target: setup - environment setup for pip and linter
 setup:
+	sudo apt-get install pylint
 	python3 -m pip install --upgrade pip
+
+# target: lint - linting project
+lint:
+	pylint *.py
 
 # target: test - calls the "test" django command
 test:
