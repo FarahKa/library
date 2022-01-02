@@ -1,6 +1,6 @@
 # target: setup - environment setup for pip and linter
 setup:
-	sudo apt-get install pylint
+	# apt-get install pylint
 	python3 -m pip install --upgrade pip
 
 # target: lint - linting project
@@ -9,7 +9,7 @@ lint:
 
 # target: test - calls the "test" django command
 test:
-	python3 manage.py test
+	python3 ./library/manage.py test
 
 # target: clean - remove all ".pyc" files
 clean:
@@ -17,7 +17,8 @@ clean:
 
 # target: update - install (and update) pip requirements
 update:
-	pip install -U -r requirements.txt
+	pip install -U -r ./library/requirements.txt
 
+# target: startdev - start project in development
 startdev:
-	python3 manage.py runserver
+	python3 ./library/manage.py runserver
