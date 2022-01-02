@@ -1,17 +1,26 @@
-FROM ubuntu:latest
+FROM python:3.9.9-alpine3.15
 
-RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
-RUN apt-get install -y \
-    python3.9 \
-    python3-pip \
-    make
-RUN alias python3=/usr/bin/python3.9
-COPY ./ /app/library/
-RUN ls /app/library
-RUN cd /app/library && make setup
-RUN cd /app/library && make update
-#RUN cd /app/library && make startdev
+ADD ./requirements.txt /app/requirements.txt
 
+RUN set -ex \
+    && apk add --no-cache --virtual .build-deps postgresql-dev build-base \
+    && python -m venv /env \
+    && /env/bin/pip install --upgrade pip \
+    && /env/bin/pip install --no-cache-dir -r /app/requirements.txt \
+    && runDeps="$(scanelf --needed --nobanner --recursive /env \
+        | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
+        | sort -u \
+        | xargs -r apk info --installed \
+        | sort -u)" \
+    && apk add --virtual rundeps $runDeps \
+    && apk del .build-deps
 
-CMD ["cd /app/library && make startdev"]
+ADD ./ /app
+WORKDIR /app
+
+ENV VIRTUAL_ENV /env
+ENV PATH /env/bin:$PATH
+
+EXPOSE 8000
+
+CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "mysite.wsgi"]
