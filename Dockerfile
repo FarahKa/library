@@ -11,7 +11,7 @@ COPY ./ /app/library/
 RUN ls /app/library
 RUN cd /app/library && make setup
 RUN cd /app/library && make update
-RUN cd /app/library && make startdev
+#RUN cd /app/library && make startdev
 
 
-CMD ["bash"]
+CMD ["cd /app/library && make startdev"]
