@@ -18,6 +18,7 @@ from django.urls import path
 from rest_framework.routers import DefaultRouter
 from inventory import views
 from rest_framework.authtoken.views import obtain_auth_token
+from django.conf.urls import include
 
 #router = DefaultRouter()
 #router.register(r'books', views.BookViewSet, basename = 'book')
@@ -29,6 +30,7 @@ urlpatterns = [
     path('books/', views.BookList.as_view()),
     path('books/<int:pk>/', views.BookDetail.as_view(), name="books"),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
-    path('percentage/<int:pk>/', views.percentage_read, name='percentage')
+    path('percentage/<int:pk>/', views.percentage_read, name='percentage'),
+    path('', include('django_prometheus.urls')),
 ] 
 #+ router.urls
