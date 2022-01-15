@@ -10,6 +10,7 @@ from rest_framework.decorators import api_view
 # Create your views here.
 
 #health check
+@api_view(('GET',))
 def health_check(request):
     return Response(status = 200)
 
