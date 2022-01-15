@@ -9,6 +9,10 @@ from rest_framework.decorators import api_view
 
 # Create your views here.
 
+#health check
+def health_check(request):
+    return Response(status = 200)
+
 @api_view(http_method_names=['GET'])
 def percentage_read(request, pk):
     book = Book.objects.filter(id=pk).first()

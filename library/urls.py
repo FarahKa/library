@@ -32,5 +32,6 @@ urlpatterns = [
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
     path('percentage/<int:pk>/', views.percentage_read, name='percentage'),
     path('', include('django_prometheus.urls')),
+    path('', views.health_check),
 ] 
 #+ router.urls
