@@ -21,6 +21,9 @@ WORKDIR /app
 ENV VIRTUAL_ENV /env
 ENV PATH /env/bin:$PATH
 
+RUN python manage.py makemigrations \
+    && python manage.py migrate
+
 EXPOSE 8000
 
 CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "library.wsgi"]
