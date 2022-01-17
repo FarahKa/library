@@ -29,5 +29,8 @@ jobs:
       run: |
         make lint
     - name: Run Tests
+      env:
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       run: |
         make test
