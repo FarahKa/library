@@ -9,7 +9,7 @@ lint:
 
 # target: test - calls the "test" django command
 test:
-	python3 ./manage.py test
+	python3 ./manage.py test  --noinput
 
 # target: clean - remove all ".pyc" files
 clean:
