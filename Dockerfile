@@ -15,6 +15,8 @@ RUN set -ex \
     && apk add --virtual rundeps $runDeps \
     && apk del .build-deps
 
+RUN apt-get update && apt-get install unixodbc-dev
+
 ADD ./ /app
 WORKDIR /app
 
