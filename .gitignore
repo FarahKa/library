@@ -16,3 +16,4 @@ media
 
 #env variables
 .env
+library/.env

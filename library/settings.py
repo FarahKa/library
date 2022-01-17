@@ -11,8 +11,17 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
+#from decouple import config
+#import os
+#from os.path import join, dirname
+#from dotenv import load_dotenv
 
+#dotenv_path = join(dirname(__file__), '.env')
+#load_dotenv(dotenv_path)
+
+import environ
+env = environ.Env()
+environ.Env.read_env()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -88,17 +97,18 @@ WSGI_APPLICATION = 'library.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'sql_server.pyodbc',
+        'ENGINE': 'mssql',
         'NAME': 'library-db',
-        'USER': config('DB_USERNAME'),
-        'PASSWORD': config('DB_PASSWORD'),
+        'USER': env('DB_USERNAME'),
+        'PASSWORD': env('DB_PASSWORD'),
         'HOST': 'library-devops.database.windows.net',
         'PORT': '1433',
-        'OPTIONS': {
-            'driver': 'ODBC Driver 13 for SQL Server',
-        },
+        #'OPTIONS': {
+        #    'driver': 'ODBC Driver 13 for SQL Server',
+        #},
     },
 }
 
