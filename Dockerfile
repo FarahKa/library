@@ -48,8 +48,8 @@ ENV PATH /env/bin:$PATH
 
 #RUN isql -v -k "DRIVER={ODBC Driver 17 for SQL Server};SERVER=library-devops.database.windows.net;UID=adminbro;PWD=RedLightGreenLight123"
 #RUN cat /etc/odbc.ini
-RUN python manage.py makemigrations \
-    && python manage.py migrate
+#RUN python manage.py makemigrations \
+#    && python manage.py migrate
 
 EXPOSE 8000
 
