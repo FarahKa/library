@@ -1,8 +1,11 @@
 # What is this?
 
 This is a web app written to test out and learn devops and ci/cd techniques.
-The webservices on the **django restful** framework. They let you submit, list and modify authors and books. 
+
+The webservices rely on the **django restful** framework. They let you submit, list and modify authors and books. 
+
 The unit tests for these webservices use the django restful **API test cases**.
+
 These tests are ran every time code is pushed to the **main** branch. This is thanks to github actions and workflows. The tests run on multiple python versions.
 A **github package** is also created each time code is pushed to main. This package is a docker image that can be used to deploy the app.
 
